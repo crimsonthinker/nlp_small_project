@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="VnCoreNLP-1.1.1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/VnCoreNLP-1.1.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/libs/VnCoreNLP-1.1.1.jar!/" />
+    </SOURCES>
+  </library>
+</component>
