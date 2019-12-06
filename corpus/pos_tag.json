@@ -1,0 +1,85 @@
+{
+  "VB" : [
+    "di tu",
+    "den",
+    "di den",
+    "di chuyen tu",
+    "den",
+    "toi",
+    "tu"
+  ],
+  "NSUBJ" : [
+    "xe bus",
+    "bus",
+    "xe",
+    "xe buyt",
+    "buyt"
+  ],
+  "BUS_NAME" : [
+    "b1",
+    "b2",
+    "b3",
+    "b4"
+  ],
+  "P" : [
+    "tu",
+    "den",
+    "toi",
+    "luc"
+  ],
+  "NOBJ" : [
+    "thanh pho hue",
+    "thanh pho da nang",
+    "thanh pho dn",
+    "thanh pho ho chi minh",
+    "thanh pho hcm",
+    "pho hue",
+    "pho da nang",
+    "pho dn",
+    "pho ho chi minh",
+    "pho hcm",
+    "tp hue",
+    "tp da nang",
+    "tp dn",
+    "tp ho chi minh",
+    "tp hcm",
+    "hue",
+    "da nang",
+    "dn",
+    "ho chi minh",
+    "hcm"
+  ],
+  "TIME" : [
+    "\\d+:\\d+",
+    "\\d+:\\d+ hr",
+    "\\d+:\\d+hr",
+    "\\d+:\\d+gio",
+    "\\d+:\\d+ gio"
+  ],
+  "WH_OBJ" : [
+    "nao"
+  ],
+  "WH_TIME" : [
+    "thoi gian",
+    "thoi gian nao",
+    "tg",
+    "luc may gio",
+    "tu may gio",
+    "tu luc nao",
+    "tu khi nao",
+    "luc nao",
+    "khi nao",
+    "may gio",
+    "bao lau"
+  ],
+  "WH_LOC" : [
+    "dau",
+    "o dau",
+    "tai dau"
+  ],
+  "PUNC" : [
+    "?",
+    ",",
+    "."
+  ]
+}

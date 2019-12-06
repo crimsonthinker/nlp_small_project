@@ -1,55 +1,59 @@
 import javafx.util.Pair;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.*;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 public class DependencyParser{
     List<Pair<String, List<String>>> wordTags = new ArrayList<>(); //word -> List of POS tag
+    HashMap<String, HashMap<String,String>> depRelationList = new HashMap<>(); // list of dependency relations
     List<Pair<String,Pair<String,String>>> deps = new ArrayList<>(); //dep(wa,wb) -> wa => wb (wa is head, wb is dependent)
     Boolean foundRoot = false;
-    String rootVerb = "";
 
-    public DependencyParser(List<Pair<String, List<String>>> wt){
+    public DependencyParser(List<Pair<String, List<String>>> wt) throws IOException,ParseException {
         wordTags = wt;
+        JSONParser jsonParser = new JSONParser();
+        FileReader reader = new FileReader("./corpus/dependency_relation.json");
+        //Read JSON file
+        JSONObject jsonObject = (JSONObject) jsonParser.parse(reader);
+        for(Object obj : jsonObject.keySet()){
+            String h = (String) obj;
+            JSONObject jsonObject2 = (JSONObject) jsonObject.get(h);
+            depRelationList.put(h,new HashMap<>());
+            for(Object obj2 : jsonObject2.keySet()){
+                String d = (String) obj2;
+                String depValue = (String) jsonObject2.get(d);
+                depRelationList.get(h).put(d,depValue);
+            }
+        }
     }
 
     private String getDepRelation(Pair<String, List<String>> head, Pair<String, List<String>> dependent){
-        //ROOT
-        if(head.getKey().equals("ROOT") && dependent.getValue().contains("VB") && !foundRoot){
-            rootVerb = dependent.getKey();
-            foundRoot = true;
-            return "root";
-        }
         if(head.getKey().equals("ROOT") || dependent.getKey().equals("ROOT")){
             return "skip"; //exception for root
-        }
-        //bus_name and xe buyt
-        if(head.getValue().contains("BUS_NAME") && dependent.getValue().contains("NSUBJ")){
-            return "amod";
-        }
-        //for verbs
-        if(head.getValue().contains("VB")){
-            if(dependent.getValue().contains("NSUBJ")){
-                return "nsubj";
-            }
-            if(dependent.getValue().contains("BUS_NAME")){
-                return "nsubj";
-            }
-            if(dependent.getValue().contains("TIME")){
-                return "nsubj";
-            }
-            if(dependent.getValue().contains("NOBJ")){
-                return "dobj";
-            }
-            if(dependent.getValue().contains("P")){
-                return "pmod";
-            }
-            if(dependent.getValue().contains("WH_TIME") || dependent.getValue().contains("WH_LOC") || dependent.getValue().contains("WH_OBJ")){
-                return "pobj";
+        }else{
+            for(String h : head.getValue()){
+                if(depRelationList.containsKey(h)){
+                    for(String d : dependent.getValue()){
+                        //get dependency
+                        if(depRelationList.get(h).containsKey(d)){
+                            String val = depRelationList.get(h).get(d);
+                            if(val == "root" && !foundRoot){
+                                foundRoot = true;
+                            }else if(val == "root" && foundRoot){
+                                continue;
+                            }
+                            return val;
+                        }
+                    }
+                }
             }
         }
-
         return "skip";
     }
 
@@ -65,8 +69,10 @@ public class DependencyParser{
 
     //malt parser ("arc-eager")
     public void parse(){
-        List< Pair<String, List<String>> > sigma = new ArrayList<>();
-        sigma.add(new Pair("ROOT",new ArrayList<>()));
+        List< Pair<String, List<String>> > sigma = new ArrayList();
+        //initialization
+        sigma.add(new Pair("ROOT",new ArrayList()));
+        sigma.get(0).getValue().add("ROOT");
 
         //beta is wordTags
         List<Pair<String, List<String>>> beta = wordTags;

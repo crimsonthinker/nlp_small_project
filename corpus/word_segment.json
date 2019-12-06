@@ -1,0 +1,67 @@
+{
+  "thanh" : [
+    "pho hue",
+    "pho da nang",
+    "pho dn",
+    "pho ho chi minh",
+    "pho hcm"
+  ],
+  "pho": [
+    "hue",
+    "da nang",
+    "dn",
+    "ho chi minh",
+    "hcm"
+  ],
+  "ho": [
+    "chi minh"
+  ],
+  "da": [
+    "nang"
+  ],
+  "xe": [
+    "bus",
+    "buyt"
+  ],
+  "\\d+:\\d+": [
+    "hr",
+    "gio"
+  ],
+  "di": [
+    "den",
+    "tu"
+  ],
+  "tu": [
+    "luc nao",
+    "khi nao",
+    "may gio"
+  ],
+  "den": [
+    "luc nao",
+    "khi nao",
+    "may gio"
+  ],
+  "may": [
+    "gio"
+  ],
+  "thoi": [
+    "gian nao",
+    "gian"
+  ],
+  "luc": [
+    "nao",
+    "may gio"
+  ],
+  "khi": [
+    "nao"
+  ],
+  "tai": [
+    "dau"
+  ],
+  "o": [
+    "dau"
+  ],
+  "bao": [
+    "lau"
+  ]
+}

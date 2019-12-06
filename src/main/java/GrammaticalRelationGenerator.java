@@ -1,33 +1,43 @@
+import javafx.util.Pair;
 
+import java.util.ArrayList;
+import java.util.List;
 
 public class GrammaticalRelationGenerator {
-    /*
     //private variables
-    private Annotation ann;
-    //declare word types of dependency list
-    private HashMap<String,String> wordTag = new HashMap<>();
-    private HashMap<String, Pair<String,String>> deps = new HashMap<>();
+    List<Pair<String, Pair<String,String>>> deps;
 
     //for storing grammatical relation
-    private class Triplet{
-        private String var; //biến
-        private String pattern; //nội dung
-        private String value; //giá trị
-        public Triplet(String vr, String p, String vl){
-            var = vr;
-            pattern = p;
-            value = vl;
+    private class TripletProposition{
+        private String pred;
+        private String term1;
+        private String term2;
+        public TripletProposition(String p, String t1, String t2){
+            pred = p;
+            term1 = t1;
+            term2 = t2;
         }
-
     }
 
-    ArrayList<Triplet> nerList = new ArrayList<>();
-    ArrayList<Triplet> relationList = new ArrayList<>();
+    //defining word term
+    private class Term{
+        private String wordSense; //meaning
+        private String constant; //nội dung
+        private String value; //second var
+        public Term(String s, String c, String v){
+            wordSense = s;
+            constant= c;
+            value = v;
+        }
+    }
+    ArrayList<Term> TermList = new ArrayList();
+    ArrayList<TripletProposition> relationList = new ArrayList();
+
     //constructors
-    public GrammaticalRelationGenerator(String s){
-        ann = new Annotation(s);
+    public GrammaticalRelationGenerator(List<Pair<String, Pair<String,String>>> d){
+        deps = d;
     }
-
+    /*
     private String getID(String value){
         for(Triplet t : nerList){
             if(t.value.equals(value)){

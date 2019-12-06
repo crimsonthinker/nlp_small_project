@@ -1,0 +1,18 @@
+{
+  "ROOT" : {
+    "VB" : "root"
+  },
+  "BUS_NAME" : {
+    "NSUBJ" : "amod"
+  },
+  "VB" : {
+    "NSUBJ" : "nsubj",
+    "BUS_NAME" : "nsubj",
+    "TIME" : "nsubj",
+    "NOBJ" : "dobj",
+    "P" : "pmod",
+    "WH_TIME" : "pobj",
+    "WH_LOC" : "pobj",
+    "WH_OBJ" : "pobj"
+  }
+}
