@@ -18,7 +18,7 @@ public class DependencyParser{
     public DependencyParser(List<Pair<String, List<String>>> wt) throws IOException,ParseException {
         wordTags = wt;
         JSONParser jsonParser = new JSONParser();
-        FileReader reader = new FileReader("./corpus/dependency_relation.json");
+        FileReader reader = new FileReader("./data/dependency_relation.json");
         //Read JSON file
         JSONObject jsonObject = (JSONObject) jsonParser.parse(reader);
         for(Object obj : jsonObject.keySet()){
@@ -34,7 +34,10 @@ public class DependencyParser{
     }
 
     private String getDepRelation(Pair<String, List<String>> head, Pair<String, List<String>> dependent){
-        if(head.getKey().equals("ROOT") || dependent.getKey().equals("ROOT")){
+        if(head.getKey().equals("ROOT") && dependent.getValue().contains("VB")){
+            System.out.println("f");
+        }
+        if(head.getKey().equals("ROOT") && dependent.getKey().equals("ROOT")){
             return "skip"; //exception for root
         }else{
             for(String h : head.getValue()){
@@ -43,9 +46,9 @@ public class DependencyParser{
                         //get dependency
                         if(depRelationList.get(h).containsKey(d)){
                             String val = depRelationList.get(h).get(d);
-                            if(val == "root" && !foundRoot){
+                            if(val.equals("root") && !foundRoot){
                                 foundRoot = true;
-                            }else if(val == "root" && foundRoot){
+                            }else if(val.equals("root") && foundRoot){
                                 continue;
                             }
                             return val;
@@ -150,4 +153,7 @@ public class DependencyParser{
         System.out.println(deps);
     }
 
+    public List<Pair<String,Pair<String,String>>> getDependencies(){
+        return deps;
+    }
 }

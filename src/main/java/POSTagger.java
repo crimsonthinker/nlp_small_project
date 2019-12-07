@@ -27,7 +27,7 @@ public class POSTagger {
         segmentedWords = s;
         //read json
         JSONParser jsonParser = new JSONParser();
-        FileReader reader = new FileReader("./corpus/pos_tag.json");
+        FileReader reader = new FileReader("./data/pos_tag.json");
         //Read JSON file
         JSONObject jsonObject= (JSONObject) jsonParser.parse(reader);
         for(Object key : jsonObject.keySet()){

@@ -1,0 +1,30 @@
+{
+  "B1" : {
+    "ADEST" : "HUE",
+    "ATIME" : "19:00",
+    "DDEST" : "HCMC",
+    "DTIME" : "10:00",
+    "DURATION" : "09:00"
+  },
+  "B2" : {
+    "ADEST" : "HUE",
+    "ATIME" : "22:30",
+    "DDEST" : "HCMC",
+    "DTIME" : "14:30",
+    "DURATION" : "08:00"
+  },
+  "B3" : {
+    "ADEST" : "HUE",
+    "ATIME" : "20:00",
+    "DDEST" : "DANANG",
+    "DTIME" : "16:00",
+    "DURATION" : "4:00"
+  },
+  "B4" : {
+    "ADEST" : "HCMC",
+    "ATIME" : "18:30",
+    "DDEST" : "DANANG",
+    "DTIME" : "08:30",
+    "DURATION" : "10:00"
+  }
+}

@@ -30,7 +30,7 @@ public class WordSegmentator {
     public WordSegmentator(String s) throws IOException, ParseException {
         sentence = s;
         JSONParser jsonParser = new JSONParser();
-        FileReader reader = new FileReader("./corpus/word_segment.json");
+        FileReader reader = new FileReader("./data/word_segment.json");
         //Read JSON file
         JSONObject jsonObject= (JSONObject) jsonParser.parse(reader);
         for(Object key : jsonObject.keySet()){

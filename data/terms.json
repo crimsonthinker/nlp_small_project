@@ -1,0 +1,34 @@
+{
+  "BUS_NAME" : [
+    "b1" , "b2" , "b3" , "b4"
+  ],
+  "CITY" : [
+    "thanh pho hue",
+    "thanh pho da nang",
+    "thanh pho dn",
+    "thanh pho ho chi minh",
+    "thanh pho hcm",
+    "pho hue",
+    "pho da nang",
+    "pho dn",
+    "pho ho chi minh",
+    "pho hcm",
+    "tp hue",
+    "tp da nang",
+    "tp dn",
+    "tp ho chi minh",
+    "tp hcm",
+    "hue",
+    "da nang",
+    "dn",
+    "ho chi minh",
+    "hcm"
+  ],
+  "TIME" : [
+    "\\d+:\\d+",
+    "\\d+:\\d+ hr",
+    "\\d+:\\d+hr",
+    "\\d+:\\d+gio",
+    "\\d+:\\d+ gio"
+  ]
+}
