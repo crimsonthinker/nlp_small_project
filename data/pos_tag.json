@@ -6,7 +6,9 @@
     "di chuyen tu",
     "den",
     "toi",
-    "tu"
+    "tu",
+    "chay tu",
+    "chay den"
   ],
   "NSUBJ" : [
     "xe bus",
@@ -70,12 +72,16 @@
     "luc nao",
     "khi nao",
     "may gio",
-    "bao lau"
+    "bao lau",
+    "trong bao lau",
+    "khoang thoi gian"
   ],
   "WH_LOC" : [
     "dau",
     "o dau",
-    "tai dau"
+    "tai dau",
+    "thanh pho nao",
+    "tp nao"
   ],
   "PUNC" : [
     "?",

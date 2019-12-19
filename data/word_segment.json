@@ -4,21 +4,24 @@
     "da nang",
     "dn",
     "ho chi minh",
-    "hcm"
+    "hcm",
+    "nao"
   ],
   "thanh" : [
     "pho hue",
     "pho da nang",
     "pho dn",
     "pho ho chi minh",
-    "pho hcm"
+    "pho hcm",
+    "pho nao"
   ],
   "pho": [
     "hue",
     "da nang",
     "dn",
     "ho chi minh",
-    "hcm"
+    "hcm",
+    "nao"
   ],
   "ho": [
     "chi minh"
@@ -70,5 +73,15 @@
   ],
   "bao": [
     "lau"
+  ],
+  "trong" : [
+    "bao lau"
+  ],
+  "khoang" : [
+    "thoi gian"
+  ],
+  "chay" : [
+    "tu",
+    "den"
   ]
 }

@@ -44,8 +44,8 @@ public class POSTagger {
             for(Map.Entry<String,List<String>> tag : tags.entrySet()){
                 String tagName = tag.getKey();
                 List<String> cTagList = tag.getValue();
-                if((tagName == "TIME" && isTime(cTagList,w)) ||
-                        (tagName != "TIME" && cTagList.contains(w))){
+                if((tagName.equals("TIME") && isTime(cTagList,w)) ||
+                        (!tagName.equals("TIME") && cTagList.contains(w))){
                     tagList.add(tagName);
                 }
             }

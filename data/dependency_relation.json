@@ -10,9 +10,13 @@
     "BUS_NAME" : "nsubj",
     "TIME" : "nsubj",
     "NOBJ" : "dobj",
-    "P" : "pmod",
+    "VB" : "vmod",
     "WH_TIME" : "pobj",
     "WH_LOC" : "pobj",
-    "WH_OBJ" : "pobj"
+    "WH_OBJ" : "pobj",
+    "P" : "nmod"
+  },
+  "P" : {
+    "TIME" : "pmod"
   }
 }

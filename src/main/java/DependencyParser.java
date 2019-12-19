@@ -34,10 +34,7 @@ public class DependencyParser{
     }
 
     private String getDepRelation(Pair<String, List<String>> head, Pair<String, List<String>> dependent){
-        if(head.getKey().equals("ROOT") && dependent.getValue().contains("VB")){
-            System.out.println("f");
-        }
-        if(head.getKey().equals("ROOT") && dependent.getKey().equals("ROOT")){
+        if(dependent.getKey().equals("ROOT")){
             return "skip"; //exception for root
         }else{
             for(String h : head.getValue()){
@@ -149,8 +146,6 @@ public class DependencyParser{
                 continue;
             }
         }
-
-        System.out.println(deps);
     }
 
     public List<Pair<String,Pair<String,String>>> getDependencies(){

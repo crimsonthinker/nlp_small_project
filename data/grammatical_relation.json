@@ -1,4 +1,10 @@
 {
-  "ATTR" : ["nmod","amod"],
-  "TNS" :
+  "nmod" : ["LOBJ"],
+  "amod" : ["LOBJ"],
+  "root" : ["TNS","PRED"],
+  "vmod" : ["TNS","PRED"],
+  "dobj" : ["LOBJ"],
+  "nsubj" : ["LSUBJ"],
+  "pobj" : ["SELF_NAME"],
+  "tmp" : ["LOBJ"]
 }

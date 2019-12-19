@@ -2,33 +2,79 @@
   "BUS_NAME" : [
     "b1" , "b2" , "b3" , "b4"
   ],
-  "CITY" : [
+  "HUE" : [
     "thanh pho hue",
+    "pho hue",
+    "tp hue",
+    "hue"
+  ],
+  "DANANG" : [
     "thanh pho da nang",
+    "pho da nang",
+    "tp da nang",
     "thanh pho dn",
+    "pho da nang",
+    "tp dn",
+    "da nang",
+    "dn"
+  ],
+  "HCMC" : [
     "thanh pho ho chi minh",
     "thanh pho hcm",
-    "pho hue",
-    "pho da nang",
-    "pho dn",
     "pho ho chi minh",
     "pho hcm",
-    "tp hue",
-    "tp da nang",
-    "tp dn",
     "tp ho chi minh",
     "tp hcm",
-    "hue",
-    "da nang",
-    "dn",
     "ho chi minh",
     "hcm"
   ],
   "TIME" : [
     "\\d+:\\d+",
-    "\\d+:\\d+ hr",
     "\\d+:\\d+hr",
+    "\\d+:\\d+ hr",
     "\\d+:\\d+gio",
     "\\d+:\\d+ gio"
+  ],
+  "WH_OBJ" : [
+    "nao"
+  ],
+  "WH_TIME" : [
+    "thoi gian",
+    "thoi gian nao",
+    "tg",
+    "luc may gio",
+    "tu may gio",
+    "tu luc nao",
+    "tu khi nao",
+    "luc nao",
+    "khi nao",
+    "may gio",
+    "bao lau",
+    "trong bao lau",
+    "khoang thoi gian"
+  ],
+  "WH_LOC" : [
+    "dau",
+    "o dau",
+    "tai dau",
+    "thanh pho nao",
+    "tp nao"
+  ],
+  "TU" : [
+    "di tu",
+    "di chuyen tu",
+    "tu",
+    "chay tu"
+  ],
+  "DEN" : [
+    "den",
+    "di den",
+    "di chuyen den",
+    "toi",
+    "chay den"
+  ],
+  "AT" : [
+    "luc",
+    "tai"
   ]
 }

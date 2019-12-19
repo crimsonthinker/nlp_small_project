@@ -3,7 +3,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,47 +10,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import Utils.*;
+
 public class GrammaticalRelationGenerator {
     //private variables
     List<Pair<String, Pair<String,String>>> deps;
-    HashMap<String,String> termList = new HashMap<>();
+    GRRepList fullList = new GRRepList();
+    HashMap<String,List<String>> relationConverter = new HashMap<>();
     int counter= 0;
 
-    //for storing grammatical relation
-    private class TripletProposition{
-        private String pred;
-        private String term1;
-        private String term2;
-        public TripletProposition(String p, String t1, String t2){
-            pred = p;
-            term1 = t1;
-            term2 = t2;
-        }
-    }
-
-    //defining word term
-    private class Term{
-        private String wordSense; //meaning
-        private String constant; //nội dung
-        private String var; //second var
-        public Term(String s, String v,String c){
-            wordSense = s;
-            var = v;
-            constant = c;
-        }
-
-        @Override
-        public String toString() {
-            return "(" + wordSense + " " + var + " " + constant + ")";
-        }
-
-        public void setVar(String var) {
-            this.var = var;
-        }
-    }
-
-    List<Term> terms = new ArrayList();
-    List<TripletProposition> relationList = new ArrayList();
+    List<TermPair> termsInPair = new ArrayList<>();
+    HashMap<String,String> termList = new HashMap<>();
 
     //constructors
     public GrammaticalRelationGenerator(List<Pair<String, Pair<String,String>>> d) throws IOException, ParseException {
@@ -68,6 +37,16 @@ public class GrammaticalRelationGenerator {
                 termList.put(v,k);
             }
         }
+
+        //read  json file for grammatical relations
+        jsonParser = new JSONParser();
+        reader = new FileReader("./data/grammatical_relation.json");
+        jsonObject = (JSONObject) jsonParser.parse(reader);
+        for(Object key : jsonObject.keySet()){
+            String k = (String)key;
+            List<String> value = (List<String>) jsonObject.get(k);
+            relationConverter.put(k,value);
+        }
     }
 
     private String getNewID(){
@@ -76,28 +55,87 @@ public class GrammaticalRelationGenerator {
         return result;
     }
 
-    private Boolean isTermExist(Term t){
-        for(Term term : terms){
-            if(t.wordSense.equals(term.wordSense) && t.constant.equals(term.constant)){
+    private Boolean isTermExist(TermPair t){
+        for(TermPair pair : termsInPair){
+            if(pair.getName().equals(t.getName())){
                 return true;
             }
         }
         return false;
     }
 
+    private String getNameFromTermPair(String constant){
+        for(TermPair t : termsInPair){
+            if(t.getConstant().equals(constant)){
+                return t.getName();
+            }
+        }
+        return "null";
+    }
+
+
+
     private void getTerm(String v){
         for(Map.Entry<String,String> entry : termList.entrySet()){
             if(v.matches(entry.getKey()) || v.equals(entry.getKey())){
                 Term t = new Term(entry.getValue(),"null",v);
                 //check if term exist
-                if(!this.isTermExist(t)){
+                if(!fullList.isTermExist(t) && !this.isTermExist(new TermPair(v.toUpperCase(),v))){
                     t.setVar(this.getNewID());
-                    terms.add(t);
+                    fullList.add(t);
+                    //Name for cities
                     return;
                 }
             }
         }
+        TermPair t = new TermPair(v.toUpperCase(),v);
+        if(!this.isTermExist(t) && !fullList.isTermExist(new Term("null","null",v))){
+            termsInPair.add(t);
+            return;
+        }
+
     }
+
+    private void getGrammaticalRelationRepresentation(Pair<String, Pair<String,String>> r){
+        if(relationConverter.containsKey(r.getKey())){
+            List<String> gr = relationConverter.get(r.getKey());
+            //get id
+            //if is TNS
+            for(String g : gr){
+                if(g.equals("TNS")) {
+                    //get id of current word
+                    TripletProposition tp = new TripletProposition("TNS", fullList.getIDFromTermList(r.getValue().getValue()), "PRES");
+                    fullList.add(tp);
+                }else if(g.equals("SELF_NAME")) { //state where predicate is the name of verb -> find term
+                    Term t = fullList.getTermFromConstant(r.getValue().getKey());
+                    String selfName = t.getWordSense();
+                    String id = t.getVar();
+                    String name = getNameFromTermPair(r.getValue().getValue());
+                    if (name.equals("null")) { //WH?
+                        name = fullList.getWordSenseFromConstant(r.getValue().getValue());
+                    }
+                    TripletProposition tp = new TripletProposition(selfName, id, name);
+                    fullList.add(tp);
+                }else if(g.equals("PRED")){
+                    Term t = fullList.getTermFromConstant(r.getValue().getValue());
+                    String id = fullList.getIDFromTermList(r.getValue().getValue());
+                    TripletProposition tp = new TripletProposition(g,id,t.getWordSense());
+                    fullList.add(tp);
+                }else{
+                    String id = fullList.getIDFromTermList(r.getValue().getKey());
+                    String name = "";
+                    name = getNameFromTermPair(r.getValue().getValue());
+                    if(name.equals("null")){
+                        name = fullList.getWordSenseFromConstant(r.getValue().getValue());
+
+                    }
+                    TripletProposition tp = new TripletProposition(g,id,name);
+                    fullList.add(tp);
+                }
+            }
+        }
+    }
+
     public void generate() throws IOException {
         //reset counter
         counter = 0;
@@ -107,8 +145,12 @@ public class GrammaticalRelationGenerator {
             this.getTerm(relation.getValue().getKey());
             this.getTerm(relation.getValue().getValue());
             //get grammatical relation
+            this.getGrammaticalRelationRepresentation(relation);
         }
-        //second loop : get
-        System.out.println(terms);
+    }
+
+    public GRRepList getGrammaticalRelation(){
+        return fullList;
+        //only get important first term and ids
     }
 }

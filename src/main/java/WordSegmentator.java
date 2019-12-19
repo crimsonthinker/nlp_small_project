@@ -47,7 +47,12 @@ public class WordSegmentator {
         utf8Words = Arrays.asList(s.split(" "));
         for(int i = 0 ; i < asciiWords.size();){ //for each separate word
             List<String> nextSegment = inlineWords.get(asciiWords.get(i)); //get its next words
-            if(nextSegment == null){ //null -> no followed words
+            if(nextSegment == null) { //null -> no followed words
+                if(asciiWords.get(i).matches("\\d+:\\d+")){
+                    nextSegment = inlineWords.get("\\d+:\\d+");
+                }
+            }
+            if(nextSegment == null){
                 asciiSegmented.add(asciiWords.get(i));
                 utf8Segmented.add(utf8Words.get(i));
                 i = i + 1;
